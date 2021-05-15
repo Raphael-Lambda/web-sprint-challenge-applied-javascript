@@ -1,4 +1,6 @@
 import axios from "axios";
+// import { createBroadcastChannel } from "msw/lib/types/utils/createBroadcastChannel";
+import { Card } from "./card"
 
 const Tabs = (topics) => {
   // TASK 3
@@ -22,11 +24,35 @@ const Tabs = (topics) => {
     const elt = document.createElement("div");
     elt.classList.add("tab");
     elt.textContent = item;
+    elt.addEventListener("click", () =>{
+      tabsFilter(item);
+    })
     main.appendChild(elt);
   })
   return main
 }
 
+const tabsFilter = (filter) => {
+  const main = document.querySelector('.cards-container');
+  //delete the existing cards
+  main.textContent = '';
+  // get the data
+  axios
+    .get("https://lambda-times-api.herokuapp.com/articles")
+    .then(item => {
+      const articles = item.data.articles;
+      for(const art in articles){
+        console.log(art, filter)
+        if (filter === "node.js"){
+          filter = "node"
+        }
+        if( art === filter){
+          articles[art].forEach(y => main.appendChild(Card(y)))
+        }
+      }
+    })
+    .catch(err => console.log(err))
+}
 const tabsAppender = (selector) => {
   // TASK 4
   // ---------------------
@@ -40,7 +66,6 @@ const tabsAppender = (selector) => {
   axios
     .get("https://lambda-times-api.herokuapp.com/topics")
     .then(item => {
-      console.log(`data: ${item.data.topics}`)
       main.appendChild(Tabs(item.data.topics))
     })
     .catch(err => console.log(err)) 
