@@ -76,7 +76,21 @@ After finishing your required elements, you can push your work further. These go
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What is the DOM?
+
+"Document Object Model" that respresent the organisation of all the HTML objects of the html page
+
 2. What is an event?
+
+Something that append to the page, for exemple if the page is loaded, clicked etc..
+
 3. What is an event listener?
+
+a function linked to an html object that will detect the events happening to this object.
+
 4. Why would we convert a NodeList into an Array?
+
+To have access to the array methods, NodeList only have access to the forEach and length methods
+
 5. What is a component?
+
+a component is a modular reusable piece of code that can be used to create objects. 
